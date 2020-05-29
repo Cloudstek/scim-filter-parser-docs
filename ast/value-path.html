@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/style.css?t=90051322">
+    <link rel="stylesheet" href="../style.css?t=1067e8dd">
+    <script src="../assets/script.js?t=93f1a66c"></script>
+    <title>Value path - SCIM Filter Parser</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <ul>
+          <li class="menu-item -level-0 -parent">
+            <ul class="submenu">
+              <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">SCIM Filter Parser</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-getting-started" href="../getting-started.html">Getting Started</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-parsers" href="../parsers.html">Parsers</a>
+              </li>
+              <li class="menu-item -level-1 -parent"><a class="link title  link-ast" href="../ast/index.html">AST</a>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-astattribute-path" href="../ast/attribute-path.html">Attribute path</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astcomparison" href="../ast/comparison.html">Comparison</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astconjunction" href="../ast/conjunction.html">Conjunction</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astconnective" href="../ast/connective.html">Connective</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astdisjunction" href="../ast/disjunction.html">Disjunction</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astnegation" href="../ast/negation.html">Negation</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astoperator" href="../ast/operator.html">Operator</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astpath" href="../ast/path.html">Path</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title -active link-astvalue-path" href="../ast/value-path.html">Value path</a>
+                    <ul class="headings heading-list">
+                      <li class="heading-item -depth-2"><a class="hlink link-implements" href="#implements">Implements</a>
+                      </li>
+                      <li class="heading-item -depth-2"><a class="hlink link-methods" href="#methods">Methods</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="body page-astvalue-path">
+        <div class="header-nav">
+          <div class="right"><a class="iconlink" href="https://github.com/Cloudstek/scim-filter-parser" data-title="Cloudstek/scim-filter-parser">
+              <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="value-path">Value Path</h1>
+<img src="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuN80iygJYhcq5S8ISqfJ5GeIIpAu5BGL74jAYZAJIajW8WhQyGh1oHcfkOaGjbzYRcenIA5VVaegbqDgNWh8510DD1S0" alt="uml diagram">
+<p>The Value Path is like an <a href="attribute-path.html">Attribute Path</a> but is actually a node and can be returned directly by both parsers. It hold both a path and a condition (in brackets).</p>
+<p>When using the <a href="../parsers.html">Path Parser</a>, a Value Path can additionaly contain a sub attribute: <code>name[givenName eq &quot;John&quot; and familyName sw &quot;J&quot;].formatted</code> &#x2014; in this case the <code>formatted</code> attribute. The Value Path&apos;s <a href="attribute-path.html">Attribute Path</a> would then have two parts (names): <code>[&apos;name&apos;, &apos;formatted&apos;]</code>. The <code>formatted</code> part will not appear in in <a href="attribute-path.html">Attribute Paths</a> further down the tree as it only applies to the Value Path.</p>
+<h4 id="example">Example</h4>
+<p><code>name[givenName eq &quot;John&quot; and familyName sw &quot;J&quot;]</code> &#x2014; which translates to filter all users with a given name of &quot;John&quot; and a family name starting with the letter J. The AST would look like this:</p>
+<img src="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuN80iygJYhcq5S8ISqfJ5GeIIpAu5BGL74jAYZAJIajW8WhQyGh1oHcfkOaGjbzYRcenIA5pVbvMQLvoIMP-7aW6oCyjI2pAB0PpiHc4QXIoOGeAkl4A_WMfHOab-KLGBjXLj3FO8JKl1UHz40qC4000" alt="uml diagram">
+<h2 id="implements">Implements</h2>
+<ul>
+<li>Node - Base interface for all AST nodes.</li>
+<li><a href="path.html">Path</a> - Interface indicating that this is a path</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<h4 id="getattributepath():-attributepath"><code>getAttributePath():</code> <a href="attribute-path.html">AttributePath</a></h4>
+<p>Returns the attribute path.</p>
+<h4 id="getnode():-node"><code>getNode(): Node</code></h4>
+<p>Returns the node of the condition between the brackets.</p>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../ast/path.html"><span class="title">Path</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

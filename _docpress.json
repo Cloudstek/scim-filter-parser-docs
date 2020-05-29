@@ -1,0 +1,447 @@
+{
+  "toc": {
+    "sections": [
+      {
+        "title": "SCIM Filter Parser",
+        "source": "README.md",
+        "url": "index.html",
+        "slug": "index",
+        "headings": [
+          {
+            "title": "Installation",
+            "depth": 2,
+            "id": "installation"
+          },
+          {
+            "title": "Usage",
+            "depth": 2,
+            "id": "usage"
+          },
+          {
+            "title": "Issues",
+            "depth": 2,
+            "id": "issues"
+          },
+          {
+            "title": "Known limitations",
+            "depth": 2,
+            "id": "known-limitations"
+          }
+        ]
+      },
+      {
+        "title": "Getting Started",
+        "source": "docs/getting-started.md",
+        "url": "getting-started.html",
+        "slug": "getting-started",
+        "headings": [
+          {
+            "title": "Installation",
+            "depth": 2,
+            "id": "installation"
+          }
+        ]
+      },
+      {
+        "title": "Parsers",
+        "source": "docs/parsers.md",
+        "url": "parsers.html",
+        "slug": "parsers",
+        "headings": [
+          {
+            "title": "Filter Parser",
+            "depth": 2,
+            "id": "filter-parser"
+          },
+          {
+            "title": "Path Parser",
+            "depth": 2,
+            "id": "path-parser"
+          }
+        ]
+      },
+      {
+        "title": "AST",
+        "source": "docs/ast/README.md",
+        "url": "ast/index.html",
+        "slug": "ast",
+        "sections": [
+          {
+            "title": "Attribute path",
+            "source": "docs/ast/attribute-path.md",
+            "url": "ast/attribute-path.html",
+            "slug": "astattribute-path",
+            "headings": [
+              {
+                "title": "Implements",
+                "depth": 2,
+                "id": "implements"
+              },
+              {
+                "title": "Methods",
+                "depth": 2,
+                "id": "methods"
+              }
+            ]
+          },
+          {
+            "title": "Comparison",
+            "source": "docs/ast/comparison.md",
+            "url": "ast/comparison.html",
+            "slug": "astcomparison",
+            "headings": [
+              {
+                "title": "Implements",
+                "depth": 2,
+                "id": "implements"
+              },
+              {
+                "title": "Methods",
+                "depth": 2,
+                "id": "methods"
+              }
+            ]
+          },
+          {
+            "title": "Conjunction",
+            "source": "docs/ast/conjunction.md",
+            "url": "ast/conjunction.html",
+            "slug": "astconjunction",
+            "headings": [
+              {
+                "title": "Implements",
+                "depth": 2,
+                "id": "implements"
+              },
+              {
+                "title": "Methods",
+                "depth": 2,
+                "id": "methods"
+              }
+            ]
+          },
+          {
+            "title": "Connective",
+            "source": "docs/ast/connective.md",
+            "url": "ast/connective.html",
+            "slug": "astconnective",
+            "headings": [
+              {
+                "title": "Example",
+                "depth": 3,
+                "id": "example"
+              },
+              {
+                "title": "Extends",
+                "depth": 3,
+                "id": "extends"
+              }
+            ]
+          },
+          {
+            "title": "Disjunction",
+            "source": "docs/ast/disjunction.md",
+            "url": "ast/disjunction.html",
+            "slug": "astdisjunction",
+            "headings": [
+              {
+                "title": "Implements",
+                "depth": 2,
+                "id": "implements"
+              },
+              {
+                "title": "Methods",
+                "depth": 2,
+                "id": "methods"
+              }
+            ]
+          },
+          {
+            "title": "Negation",
+            "source": "docs/ast/negation.md",
+            "url": "ast/negation.html",
+            "slug": "astnegation",
+            "headings": [
+              {
+                "title": "Implements",
+                "depth": 2,
+                "id": "implements"
+              },
+              {
+                "title": "Methods",
+                "depth": 2,
+                "id": "methods"
+              }
+            ]
+          },
+          {
+            "title": "Operator",
+            "source": "docs/ast/operator.md",
+            "url": "ast/operator.html",
+            "slug": "astoperator",
+            "headings": [
+              {
+                "title": "Custom filter operations",
+                "depth": 3,
+                "id": "custom-filter-operations"
+              }
+            ]
+          },
+          {
+            "title": "Path",
+            "source": "docs/ast/path.md",
+            "url": "ast/path.html",
+            "slug": "astpath"
+          },
+          {
+            "title": "Value path",
+            "source": "docs/ast/value-path.md",
+            "url": "ast/value-path.html",
+            "slug": "astvalue-path",
+            "headings": [
+              {
+                "title": "Implements",
+                "depth": 2,
+                "id": "implements"
+              },
+              {
+                "title": "Methods",
+                "depth": 2,
+                "id": "methods"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "index": {
+    "index.html": {
+      "source": "README.md",
+      "title": "SCIM Filter Parser",
+      "pageTitle": "SCIM Filter Parser",
+      "slug": "index",
+      "headings": [
+        {
+          "title": "Installation",
+          "depth": 2,
+          "id": "installation"
+        },
+        {
+          "title": "Usage",
+          "depth": 2,
+          "id": "usage"
+        },
+        {
+          "title": "Issues",
+          "depth": 2,
+          "id": "issues"
+        },
+        {
+          "title": "Known limitations",
+          "depth": 2,
+          "id": "known-limitations"
+        }
+      ]
+    },
+    "getting-started.html": {
+      "source": "docs/getting-started.md",
+      "title": "Getting Started - SCIM Filter Parser",
+      "pageTitle": "Getting Started",
+      "slug": "getting-started",
+      "headings": [
+        {
+          "title": "Installation",
+          "depth": 2,
+          "id": "installation"
+        }
+      ]
+    },
+    "parsers.html": {
+      "source": "docs/parsers.md",
+      "title": "Parsers - SCIM Filter Parser",
+      "pageTitle": "Parsers",
+      "slug": "parsers",
+      "headings": [
+        {
+          "title": "Filter Parser",
+          "depth": 2,
+          "id": "filter-parser"
+        },
+        {
+          "title": "Path Parser",
+          "depth": 2,
+          "id": "path-parser"
+        }
+      ]
+    },
+    "ast/index.html": {
+      "source": "docs/ast/README.md",
+      "title": "AST - SCIM Filter Parser",
+      "pageTitle": "AST",
+      "slug": "ast"
+    },
+    "ast/attribute-path.html": {
+      "source": "docs/ast/attribute-path.md",
+      "title": "Attribute path - SCIM Filter Parser",
+      "pageTitle": "Attribute path",
+      "slug": "astattribute-path",
+      "headings": [
+        {
+          "title": "Implements",
+          "depth": 2,
+          "id": "implements"
+        },
+        {
+          "title": "Methods",
+          "depth": 2,
+          "id": "methods"
+        }
+      ]
+    },
+    "ast/comparison.html": {
+      "source": "docs/ast/comparison.md",
+      "title": "Comparison - SCIM Filter Parser",
+      "pageTitle": "Comparison",
+      "slug": "astcomparison",
+      "headings": [
+        {
+          "title": "Implements",
+          "depth": 2,
+          "id": "implements"
+        },
+        {
+          "title": "Methods",
+          "depth": 2,
+          "id": "methods"
+        }
+      ]
+    },
+    "ast/conjunction.html": {
+      "source": "docs/ast/conjunction.md",
+      "title": "Conjunction - SCIM Filter Parser",
+      "pageTitle": "Conjunction",
+      "slug": "astconjunction",
+      "headings": [
+        {
+          "title": "Implements",
+          "depth": 2,
+          "id": "implements"
+        },
+        {
+          "title": "Methods",
+          "depth": 2,
+          "id": "methods"
+        }
+      ]
+    },
+    "ast/connective.html": {
+      "source": "docs/ast/connective.md",
+      "title": "Connective - SCIM Filter Parser",
+      "pageTitle": "Connective",
+      "slug": "astconnective",
+      "headings": [
+        {
+          "title": "Example",
+          "depth": 3,
+          "id": "example"
+        },
+        {
+          "title": "Extends",
+          "depth": 3,
+          "id": "extends"
+        }
+      ]
+    },
+    "ast/disjunction.html": {
+      "source": "docs/ast/disjunction.md",
+      "title": "Disjunction - SCIM Filter Parser",
+      "pageTitle": "Disjunction",
+      "slug": "astdisjunction",
+      "headings": [
+        {
+          "title": "Implements",
+          "depth": 2,
+          "id": "implements"
+        },
+        {
+          "title": "Methods",
+          "depth": 2,
+          "id": "methods"
+        }
+      ]
+    },
+    "ast/negation.html": {
+      "source": "docs/ast/negation.md",
+      "title": "Negation - SCIM Filter Parser",
+      "pageTitle": "Negation",
+      "slug": "astnegation",
+      "headings": [
+        {
+          "title": "Implements",
+          "depth": 2,
+          "id": "implements"
+        },
+        {
+          "title": "Methods",
+          "depth": 2,
+          "id": "methods"
+        }
+      ]
+    },
+    "ast/operator.html": {
+      "source": "docs/ast/operator.md",
+      "title": "Operator - SCIM Filter Parser",
+      "pageTitle": "Operator",
+      "slug": "astoperator",
+      "headings": [
+        {
+          "title": "Custom filter operations",
+          "depth": 3,
+          "id": "custom-filter-operations"
+        }
+      ]
+    },
+    "ast/path.html": {
+      "source": "docs/ast/path.md",
+      "title": "Path - SCIM Filter Parser",
+      "pageTitle": "Path",
+      "slug": "astpath"
+    },
+    "ast/value-path.html": {
+      "source": "docs/ast/value-path.md",
+      "title": "Value path - SCIM Filter Parser",
+      "pageTitle": "Value path",
+      "slug": "astvalue-path",
+      "headings": [
+        {
+          "title": "Implements",
+          "depth": 2,
+          "id": "implements"
+        },
+        {
+          "title": "Methods",
+          "depth": 2,
+          "id": "methods"
+        }
+      ]
+    }
+  },
+  "sources": {
+    "README.md": "index.html",
+    "docs/getting-started.md": "getting-started.html",
+    "docs/parsers.md": "parsers.html",
+    "docs/ast/README.md": "ast/index.html",
+    "docs/ast/attribute-path.md": "ast/attribute-path.html",
+    "docs/ast/comparison.md": "ast/comparison.html",
+    "docs/ast/conjunction.md": "ast/conjunction.html",
+    "docs/ast/connective.md": "ast/connective.html",
+    "docs/ast/disjunction.md": "ast/disjunction.html",
+    "docs/ast/negation.md": "ast/negation.html",
+    "docs/ast/operator.md": "ast/operator.html",
+    "docs/ast/path.md": "ast/path.html",
+    "docs/ast/value-path.md": "ast/value-path.html",
+    "docs/docpress.json": "docpress.json",
+    "docs/style.css": "style.css"
+  }
+}

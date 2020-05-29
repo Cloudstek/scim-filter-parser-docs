@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/style.css?t=90051322">
+    <link rel="stylesheet" href="../style.css?t=1067e8dd">
+    <script src="../assets/script.js?t=93f1a66c"></script>
+    <title>Attribute path - SCIM Filter Parser</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <ul>
+          <li class="menu-item -level-0 -parent">
+            <ul class="submenu">
+              <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">SCIM Filter Parser</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-getting-started" href="../getting-started.html">Getting Started</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-parsers" href="../parsers.html">Parsers</a>
+              </li>
+              <li class="menu-item -level-1 -parent"><a class="link title  link-ast" href="../ast/index.html">AST</a>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title -active link-astattribute-path" href="../ast/attribute-path.html">Attribute path</a>
+                    <ul class="headings heading-list">
+                      <li class="heading-item -depth-2"><a class="hlink link-implements" href="#implements">Implements</a>
+                      </li>
+                      <li class="heading-item -depth-2"><a class="hlink link-methods" href="#methods">Methods</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astcomparison" href="../ast/comparison.html">Comparison</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astconjunction" href="../ast/conjunction.html">Conjunction</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astconnective" href="../ast/connective.html">Connective</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astdisjunction" href="../ast/disjunction.html">Disjunction</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astnegation" href="../ast/negation.html">Negation</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astoperator" href="../ast/operator.html">Operator</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astpath" href="../ast/path.html">Path</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astvalue-path" href="../ast/value-path.html">Value path</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="body page-astattribute-path">
+        <div class="header-nav">
+          <div class="right"><a class="iconlink" href="https://github.com/Cloudstek/scim-filter-parser" data-title="Cloudstek/scim-filter-parser">
+              <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="attribute-path">Attribute Path</h1>
+<img src="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuN80iygJYhcq5HnBIeeoaqfBKXKA4aiok1IqunM2apDISnF1JB_4tDHYBeVKl1IGQX0Dr0y0" alt="uml diagram">
+<p>The Attribute Path is simply a path to an attribute (e.g. <code>name.firstName</code>) and implements the <code>AST\Path</code> interface. It is not considered a node and as such has no notion of where it is in the tree.</p>
+<p>In the <a href="../parsers.html">Filter Parser</a> this means that it&apos;s never returned on its own but always as part of a <a href="value-path.html">Value Path</a> or <a href="comparison.html">Comparison</a>.</p>
+<p>The only time it will be returned by itself is when using the <a href="../parsers.html">Path Parser</a>.</p>
+<h4 id="example">Example</h4>
+<p>Take the this example where we have a Value Path with a Conjunction containing two Comparisons, which could be something like <code>name[givenName eq &quot;John&quot; and familyName sw &quot;J&quot;]</code> which translates to filter all users with a given name of &quot;John&quot; and a family name starting with the letter J.</p>
+<p>The Attribute Path of the Value Path would contain only <code>[&apos;name&apos;]</code> but the Attribute Paths of the Comparisons down the tree contain the full path <code>[&apos;name&apos;, &apos;givenName&apos;]</code> and for the other Comparison <code>[&apos;name&apos;, &apos;familyName&apos;]</code>.</p>
+<p>So even though they have no direct link to their parent node, you still have the full path, saving you from having to traverse up and down the tree or keep complex states when parsing the AST.</p>
+<img src="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuN80iygJYhcq5S8ISqfJ5GeIIpAu5BGL74jAYZAJIajW8WhQyGh1oHcfkOaGjbzYRcenIA5pVbvMQLvoIMP-7aW6oCyjI2pAB0PpiHc4QXIoOGeAkl4A_WMfHOab-KLGBjXLj3FO8JKl1UHz40qC4000" alt="uml diagram">
+<h2 id="implements">Implements</h2>
+<ul>
+<li><a href="https://www.php.net/manual/en/class.countable.php">Countable</a> - Count the number of names</li>
+<li><a href="https://www.php.net/manual/en/class.arrayaccess.php">Array access</a> - Access the names as indexed array</li>
+<li><a href="https://www.php.net/manual/en/class.iteratoraggregate.php">Iterator</a> - Iterate over the names directly</li>
+<li><a href="path.html">Path</a> - Interface indicating that this is a path</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<h4 id="getschema():-stringornull"><code>getSchema(): string|null</code></h4>
+<p>Returns the schema part of an attribute path.</p>
+<h4 id="getnames():-string"><code>getNames(): string[]</code></h4>
+<p>Returns an array of names (parts). For example <code>foo.bar</code> will return <code>[&apos;foo&apos;, &apos;bar&apos;]</code>.</p>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../ast/index.html"><span class="title">AST</span></a></div>
+          <div class="right"><a href="../ast/comparison.html"><span class="label">Next: </span><span class="title">Comparison</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

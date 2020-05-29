@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/style.css?t=90051322">
+    <link rel="stylesheet" href="../style.css?t=1067e8dd">
+    <script src="../assets/script.js?t=93f1a66c"></script>
+    <title>Path - SCIM Filter Parser</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <ul>
+          <li class="menu-item -level-0 -parent">
+            <ul class="submenu">
+              <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">SCIM Filter Parser</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-getting-started" href="../getting-started.html">Getting Started</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-parsers" href="../parsers.html">Parsers</a>
+              </li>
+              <li class="menu-item -level-1 -parent"><a class="link title  link-ast" href="../ast/index.html">AST</a>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-astattribute-path" href="../ast/attribute-path.html">Attribute path</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astcomparison" href="../ast/comparison.html">Comparison</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astconjunction" href="../ast/conjunction.html">Conjunction</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astconnective" href="../ast/connective.html">Connective</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astdisjunction" href="../ast/disjunction.html">Disjunction</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astnegation" href="../ast/negation.html">Negation</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astoperator" href="../ast/operator.html">Operator</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title -active link-astpath" href="../ast/path.html">Path</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astvalue-path" href="../ast/value-path.html">Value path</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="body page-astpath">
+        <div class="header-nav">
+          <div class="right"><a class="iconlink" href="https://github.com/Cloudstek/scim-filter-parser" data-title="Cloudstek/scim-filter-parser">
+              <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="path">Path</h1>
+<p>In the AST there are two types of paths:</p>
+<p>The <a href="attribute-path.html">Attribute Path</a> is simply a path to an attribute (e.g. <code>name.firstName</code>) and implements the <code>AST\Path</code> interface as it is not a node by itself. For instance, the attribute path is part of a value path.</p>
+<p>The <a href="value-path.html">Value Path</a> implements both the <code>AST\Path</code> and <code>AST\Node</code> interfaces and is a node by itself. It not only dictates a path to an attribute but also a set of conditions (e.g. <code>name[givenName eq &quot;John&quot;].familyName</code> to get all family names of people named &quot;John&quot;).</p>
+<img src="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuN80iygJYhcq5S8ISqfJ5GeIIpAu5BGL74jAYZAJIaiG8dxvAQbS3gbvAI3b81fe0000" alt="uml diagram">
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../ast/operator.html"><span class="title">Operator</span></a></div>
+          <div class="right"><a href="../ast/value-path.html"><span class="label">Next: </span><span class="title">Value path</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/style.css?t=90051322">
+    <link rel="stylesheet" href="../style.css?t=1067e8dd">
+    <script src="../assets/script.js?t=93f1a66c"></script>
+    <title>Operator - SCIM Filter Parser</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <ul>
+          <li class="menu-item -level-0 -parent">
+            <ul class="submenu">
+              <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">SCIM Filter Parser</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-getting-started" href="../getting-started.html">Getting Started</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-parsers" href="../parsers.html">Parsers</a>
+              </li>
+              <li class="menu-item -level-1 -parent"><a class="link title  link-ast" href="../ast/index.html">AST</a>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-astattribute-path" href="../ast/attribute-path.html">Attribute path</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astcomparison" href="../ast/comparison.html">Comparison</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astconjunction" href="../ast/conjunction.html">Conjunction</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astconnective" href="../ast/connective.html">Connective</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astdisjunction" href="../ast/disjunction.html">Disjunction</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astnegation" href="../ast/negation.html">Negation</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title -active link-astoperator" href="../ast/operator.html">Operator</a>
+                    <ul class="headings heading-list">
+                      <li class="heading-item -depth-3"><a class="hlink link-custom-filter-operations" href="#custom-filter-operations">Custom filter operations</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astpath" href="../ast/path.html">Path</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astvalue-path" href="../ast/value-path.html">Value path</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="body page-astoperator">
+        <div class="header-nav">
+          <div class="right"><a class="iconlink" href="https://github.com/Cloudstek/scim-filter-parser" data-title="Cloudstek/scim-filter-parser">
+              <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="operator">Operator</h1>
+<p><a href="https://github.com/Cloudstek/php-enum">Enumeration</a> of the different supported <a href="comparison.html">Comparison</a> operators.</p>
+<p>The list and meaning of the operators supported by default can be found in the <a href="https://tools.ietf.org/html/rfc7644#section-3.4.2.2">RFC here</a>.</p>
+<h3 id="custom-filter-operations">Custom filter operations</h3>
+<p>The <a href="https://tools.ietf.org/html/rfc7644#section-3.4.2.2">SCIM RFC</a> notes that providers may support additional filter operations. Currently there is no easy way of implementing these without adding some code yourself. This might change in the future though.</p>
+<p>To support a custom operator you will need to extend the Operator enum to add your own operators, then extend the <a href="comparison.html">Comparison</a> class to support your own operator enum and last extend the <a href="../parsers.html">Parser</a> to override the <code>parseComparison</code> method.</p>
+<h5 class="file-heading" id="myoperator.php">MyOperator.php</h5>
+<p>Extend the Operator enum class to add your own operators. Make sure to keep the class <code>@method</code> docblocks to have your IDE autocomplete the methods. For more information about the enumeration implementation, <a href="https://github.com/Cloudstek/php-enum">see its documentation</a>.</p>
+<pre><code class="lang-php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="pl-k">namespace</span> <span class="pl-ent">App</span>\<span class="pl-ent">AST</span>;
+
+<span class="pl-k">use</span> <span class="pl-ent">Cloudstek</span>\<span class="pl-ent">SCIM</span>\<span class="pl-ent">FilterParser</span>\<span class="pl-ent">AST</span>\<span class="pl-ent">Operator</span>;
+
+<span class="pl-c">/**
+ * My comparison operator.
+ *
+ * <span class="hljs-doctag">@method</span> static static EQ()
+ * <span class="hljs-doctag">@method</span> static static NE()
+ * <span class="hljs-doctag">@method</span> static static CO()
+ * <span class="hljs-doctag">@method</span> static static SW()
+ * <span class="hljs-doctag">@method</span> static static EW()
+ * <span class="hljs-doctag">@method</span> static static GT()
+ * <span class="hljs-doctag">@method</span> static static LT()
+ * <span class="hljs-doctag">@method</span> static static GE()
+ * <span class="hljs-doctag">@method</span> static static LE()
+ * <span class="hljs-doctag">@method</span> static static PR()
+ * 
+ * <span class="hljs-doctag">@method</span> static static REGEX()
+ */</span>
+<span class="hljs-class"><span class="pl-k">class</span> <span class="pl-ent">MyOperator</span> <span class="pl-k">extends</span> <span class="pl-ent">Operator</span>
+</span>{
+    <span class="pl-c">// Custom &apos;regex&apos; operator.</span>
+    <span class="pl-k">private</span> <span class="pl-k">const</span> REGEX = <span class="pl-s">&apos;regex&apos;</span>;
+}
+</code></pre>
+<h5 class="file-heading" id="mycomparison.php">MyComparison.php</h5>
+<p>Extend the <a href="comparison.html">Comparison</a> class to add support for your own operator enum (it must be an enum).</p>
+<pre><code class="lang-php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="pl-k">namespace</span> <span class="pl-ent">App</span>\<span class="pl-ent">AST</span>;
+
+<span class="pl-k">use</span> <span class="pl-ent">Cloudstek</span>\<span class="pl-ent">SCIM</span>\<span class="pl-ent">FilterParser</span>\<span class="pl-ent">AST</span>\<span class="pl-ent">AttributePath</span>;
+<span class="pl-k">use</span> <span class="pl-ent">Cloudstek</span>\<span class="pl-ent">SCIM</span>\<span class="pl-ent">FilterParser</span>\<span class="pl-ent">AST</span>\<span class="pl-ent">Comparison</span>;
+<span class="pl-k">use</span> <span class="pl-ent">Cloudstek</span>\<span class="pl-ent">SCIM</span>\<span class="pl-ent">FilterParser</span>\<span class="pl-ent">AST</span>\<span class="pl-ent">Node</span>;
+
+<span class="hljs-class"><span class="pl-k">class</span> <span class="pl-ent">MyComparison</span> <span class="pl-k">extends</span> <span class="pl-ent">Comparison</span>
+</span>{
+    <span class="pl-c">/**
+     * My comparison.
+     *
+     * <span class="hljs-doctag">@param</span> AttributePath              $attributePath
+     * <span class="hljs-doctag">@param</span> string|MyOperator          $operator
+     * <span class="hljs-doctag">@param</span> bool|float|int|string|null $value
+     * <span class="hljs-doctag">@param</span> Node|null                  $parent
+     *
+     * <span class="hljs-doctag">@throws</span> \UnexpectedValueException On invalid operator.
+     */</span>
+    <span class="pl-k">public</span> <span class="hljs-function"><span class="pl-k">function</span> <span class="pl-ent">__construct</span><span class="hljs-params">(AttributePath $attributePath, $operator, $value, ?Node $parent = null)</span>
+    </span>{
+        $myOperator = MyOperator::get($operator);
+
+        <span class="pl-k">parent</span>::__construct($attributePath, $myOperator, $value, $parent);
+    }
+}
+</code></pre>
+<h5 class="file-heading" id="myfilterparser.php">MyFilterParser.php</h5>
+<p>Extend either the <a href="../parsers.html">FilterParser</a> or <a href="../parsers.html">PathParser</a> and override the <code>parseComparison</code> method. Before we do anything we save the current position of the stream so when we decide not to handle this comparison, we can reset the stream back to its original position and pass it back to our parent parser class.</p>
+<pre><code class="lang-php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="pl-k">namespace</span> <span class="pl-ent">App</span>;
+
+<span class="pl-k">use</span> <span class="pl-ent">App</span>\<span class="pl-ent">AST</span>\<span class="pl-ent">MyComparison</span>;
+<span class="pl-k">use</span> <span class="pl-ent">Cloudstek</span>\<span class="pl-ent">SCIM</span>\<span class="pl-ent">FilterParser</span>\<span class="pl-ent">AST</span>;
+<span class="pl-k">use</span> <span class="pl-ent">Nette</span>\<span class="pl-ent">Tokenizer</span>;
+
+<span class="hljs-class"><span class="pl-k">class</span> <span class="pl-ent">MyFilterParser</span> <span class="pl-k">extends</span> <span class="pl-ent">FilterParser</span>
+</span>{
+    <span class="pl-k">protected</span> <span class="hljs-function"><span class="pl-k">function</span> <span class="pl-ent">parseComparison</span><span class="hljs-params">(Tokenizer\Stream $stream, AST\AttributePath $attributePath)</span>
+    </span>{
+        <span class="pl-c">// Save position for if we don&apos;t handle this comparison.</span>
+        $position = $stream-&gt;position;
+
+        <span class="pl-c">// Read the operator from the stream</span>
+        $operator = trim($stream-&gt;consumeValue(<span class="pl-k">self</span>::T_STRING, <span class="pl-k">self</span>::T_COMP_OP));
+        $value = <span class="pl-k">null</span>;
+
+        <span class="pl-c">// It&apos;s a regex, do stuff!</span>
+        <span class="pl-k">if</span> (strcasecmp($operator, <span class="pl-s">&apos;regex&apos;</span>) === <span class="hljs-number">0</span>) {
+            $value = $stream-&gt;consumeToken(<span class="pl-k">self</span>::T_STRING);
+
+            <span class="pl-k">return</span> <span class="pl-k">new</span> MyComparison($attributePath, $operator, $value);
+        }
+
+        <span class="pl-c">// It&apos;s not a regex, let a parent handle the faults. But first, reset the stream position like we weren&apos;t here.</span>
+        $stream-&gt;position = $position;
+
+        <span class="pl-k">return</span> <span class="pl-k">parent</span>::parseComparison($stream, $attributePath);
+    }
+}
+</code></pre>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../ast/negation.html"><span class="title">Negation</span></a></div>
+          <div class="right"><a href="../ast/path.html"><span class="label">Next: </span><span class="title">Path</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/style.css?t=90051322">
+    <link rel="stylesheet" href="style.css?t=1067e8dd">
+    <script src="assets/script.js?t=93f1a66c"></script>
+    <title>Parsers - SCIM Filter Parser</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <ul>
+          <li class="menu-item -level-0 -parent">
+            <ul class="submenu">
+              <li class="menu-item -level-1"><a class="link title  link-index" href="index.html">SCIM Filter Parser</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-getting-started" href="getting-started.html">Getting Started</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title -active link-parsers" href="parsers.html">Parsers</a>
+                <ul class="headings heading-list">
+                  <li class="heading-item -depth-2"><a class="hlink link-filter-parser" href="#filter-parser">Filter Parser</a>
+                  </li>
+                  <li class="heading-item -depth-2"><a class="hlink link-path-parser" href="#path-parser">Path Parser</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1 -parent"><a class="link title  link-ast" href="ast/index.html">AST</a>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-astattribute-path" href="ast/attribute-path.html">Attribute path</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astcomparison" href="ast/comparison.html">Comparison</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astconjunction" href="ast/conjunction.html">Conjunction</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astconnective" href="ast/connective.html">Connective</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astdisjunction" href="ast/disjunction.html">Disjunction</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astnegation" href="ast/negation.html">Negation</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astoperator" href="ast/operator.html">Operator</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astpath" href="ast/path.html">Path</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-astvalue-path" href="ast/value-path.html">Value path</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="body page-parsers">
+        <div class="header-nav">
+          <div class="right"><a class="iconlink" href="https://github.com/Cloudstek/scim-filter-parser" data-title="Cloudstek/scim-filter-parser">
+              <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="parsers">Parsers</h1>
+<p>Technically this library is called SCIM Filter Parser but as the code for parsing paths is so similar to parsing filters, it made sense to include both parsers in one library. Besides, you&apos;ll likely use them both anyway.</p>
+<p>These parsers will take a string and output an <a href="ast/index.html">AST</a>. It is then up to you to work your way through the AST and for example build your database query.</p>
+<h2 id="filter-parser">Filter Parser</h2>
+<blockquote>
+<p>Cloudstek\SCIM\FilterParser\FilterParser</p>
+</blockquote>
+<p>Parses <a href="https://tools.ietf.org/html/rfc7644#section-3.4.2.2">filter strings</a> used to filter results when querying resources. In attempt to parse a path (e.g. <code>foo.bar</code>) instead of a filter (<code>foo.bar eq &quot;baz&quot;</code>) this parser will throw an exception. To parse paths, use the path parser instead.</p>
+<h4 id="example">Example</h4>
+<p><em>Please be aware that this is just an example and not to be used anywhere. Building an SQL query like this completely unsafe, but again here just for demonstration purposes.</em></p>
+<pre><code class="lang-php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="pl-k">use</span> <span class="pl-ent">Cloudstek</span>\<span class="pl-ent">SCIM</span>\<span class="pl-ent">FilterParser</span>\<span class="pl-ent">FilterParser</span>;
+<span class="pl-k">use</span> <span class="pl-ent">Cloudstek</span>\<span class="pl-ent">SCIM</span>\<span class="pl-ent">FilterParser</span>\<span class="pl-ent">AST</span>;
+
+<span class="pl-c">// Map attribute paths to column names.</span>
+$columnMap = [
+    <span class="pl-s">&apos;name.familyName&apos;</span> =&gt; <span class="pl-s">&apos;family_name&apos;</span>
+];
+
+<span class="pl-c">// Create the filter parser.</span>
+$filterParser = <span class="pl-k">new</span> FilterParser();
+
+$comparison = $filterParser-&gt;parse(<span class="pl-s">&apos;name.familyName sw &quot;J&quot;&apos;</span>); 
+<span class="pl-c">// -&gt; AST\Comparison</span>
+
+$column = $columnMap[(string)$comparison-&gt;getAttributePath()];
+<span class="pl-c">// &apos;name.familyName&apos; -&gt; &apos;family_name&apos;</span>
+
+$value = $comparison-&gt;getValue();
+<span class="pl-c">// -&gt; &apos;J&apos;</span>
+
+$sql = <span class="pl-s">&apos;SELECT * FROM person WHERE &apos;</span>.$column.<span class="pl-s">&apos; &apos;</span>;
+
+<span class="pl-k">switch</span> ($comparison-&gt;getOperator()) {
+    <span class="pl-k">case</span> AST\Operator::EQ:
+        $sql .= sprintf(<span class="pl-s">&apos; = &quot;%s&quot;&apos;</span>, $value);
+        <span class="pl-c">// -&gt; = &quot;J&quot;</span>
+        <span class="pl-k">break</span>;
+    <span class="pl-k">case</span> AST\Operator::SW:
+        $sql .= sprintf(<span class="pl-s">&apos; LIKE &quot;%%%s&quot;&apos;</span>, $value);
+        <span class="pl-c">// -&gt; LIKE &quot;%J&quot;</span>
+        <span class="pl-k">break</span>;
+    <span class="pl-c">// ...</span>
+}
+
+<span class="pl-c">// name.familyName sw &quot;J&quot; </span>
+<span class="pl-c">//  -&gt; SELECT * FROM person WHERE family_name LIKE &quot;%J&quot;</span>
+
+</code></pre>
+<h2 id="path-parser">Path Parser</h2>
+<blockquote>
+<p>Cloudstek\SCIM\FilterParser\PathParser</p>
+</blockquote>
+<p>Different from the filter parser, the path parser only supports parsing attribute and value paths as used in <a href="https://tools.ietf.org/html/rfc7644#section-3.5.2"><code>PATCH</code> requests</a>. Attempts to parse filters (e.g. <code>foo eq &quot;bar&quot;</code>) will result in an exception being thrown.</p>
+<p>In addition, value paths (e.g. <code>members[value eq &quot;foo&quot;]</code>) can now reference a sub attribute: <code>members[value eq &quot;foo&quot;].displayName</code>, which isn&apos;t allowed in filters.</p>
+<h4 id="example">Example</h4>
+<pre><code class="lang-php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="pl-k">use</span> <span class="pl-ent">Cloudstek</span>\<span class="pl-ent">SCIM</span>\<span class="pl-ent">FilterParser</span>\<span class="pl-ent">PathParser</span>;
+
+<span class="pl-c">// Create the path parser.</span>
+$pathParser = <span class="pl-k">new</span> PathParser();
+
+$attributePath = $pathParser-&gt;parse(<span class="pl-s">&apos;name.familyName&apos;</span>); 
+<span class="pl-c">// -&gt; AST\AttributePath</span>
+
+<span class="pl-c">// Get attribute names</span>
+$names = $attributePath-&gt;getNames();
+<span class="pl-c">// -&gt; [&apos;name&apos;, &apos;familyName&apos;]</span>
+
+<span class="pl-c">// Or use $attributePath as array directly.</span>
+$firstAttribute = $attributePath[<span class="hljs-number">0</span>]; 
+<span class="pl-c">// -&gt; name</span>
+$lastAttribute = $attributePath[<span class="hljs-number">1</span>];
+<span class="pl-c">// -&gt; familyName</span>
+
+$valuePath = $pathParser-&gt;parse(<span class="pl-s">&apos;name[given eq &quot;John&quot;].familyName&apos;</span>); 
+<span class="pl-c">// -&gt; AST\ValuePath</span>
+</code></pre>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="getting-started.html"><span class="title">Getting Started</span></a></div>
+          <div class="right"><a href="ast/index.html"><span class="label">Next: </span><span class="title">AST</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
